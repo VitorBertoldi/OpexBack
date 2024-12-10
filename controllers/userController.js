@@ -1,6 +1,6 @@
 const userController = {
     register: function (req, res) {
-        res.send('register')
+        res.send('registerr')
     },
     login: function (req, res) {
         res.send('login')
