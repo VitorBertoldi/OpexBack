@@ -1,5 +1,6 @@
-import { Sequelize } from 'sequelize';
-import dbConfig from './config/db.config.js';
+import { Sequelize, DataTypes } from 'sequelize';
+import dbConfig from '../config/db.config.js';
+import users from './users.model.js'
 
 const sequelize = new Sequelize({
   host: dbConfig.HOST,
@@ -17,3 +18,18 @@ try {
 } catch (error) {
   console.error('Unable to connect to the database:', error);
 }
+
+const db = {};
+
+db.sequelize = sequelize;
+
+
+db.users = users(sequelize, DataTypes);
+
+Object.keys(db).forEach((modelName) => {
+  if (db[modelName].associate) {
+    db[modelName].associate(db);
+  }
+});
+
+export default db;
