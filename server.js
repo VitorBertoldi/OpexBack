@@ -1,11 +1,11 @@
 import app from './app.js';
 import db from './models/index.js';
 
-const PORT = 3000; 
+const PORT = 8080; 
 
 (async () => {
   try {
-    await db.sequelize.sync();
+    // await db.sequelize.sync();
     console.log('Database synchronized');
     app.listen(PORT, () => {
       console.log(`Server started on port ${PORT}`);

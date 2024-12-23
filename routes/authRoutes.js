@@ -1,10 +1,6 @@
 import express from 'express';
 import {
   createUser,
-  readUsers,
-  getUserById,
-  updateUser,
-  deleteUser,
   login
 } from '../controllers/userController.js';
 import { verifyTokenApp } from '../controllers/authController.js';
@@ -20,17 +16,10 @@ const userRoutes = (app) => {
 
   const router = express.Router();
 
-  router.post('/', createUser);   
-  router.post('/login', login);   
+  router.post('/signup', createUser);
+  router.post('/signin', login);
 
-  router.use(verifyTokenApp);  
-
-  router.get('/', readUsers); 
-  router.get('/:id', getUserById); 
-  router.put('/:id', updateUser);  
-  router.delete('/:id', deleteUser);  
-
-  app.use('/api/admin/users', router);
+  app.use('/oapi', router);
 };
 
 export default userRoutes;

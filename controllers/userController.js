@@ -39,8 +39,8 @@ export const login = async (req, res) => {
     if (!passwordAndUserMatch) return res.status(400).send('Email ou senha incorretos');
 
     const token = jwt.sign({ _id: selectedUser._id }, process.env.TOKEN_SECRET);
-    res.header('authorization-token', token);
 
+    res.header('authorization-token', token);
     res.send('User logged in')
 
 }
