@@ -1,5 +1,5 @@
-import app from './app.js';
-import db from './models/index.js';
+import app from './src/app.js';
+import db from './src/models/index.js';
 
 const PORT = 8080; 
 

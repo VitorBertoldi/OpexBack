@@ -32,16 +32,36 @@ export const createUser = async (req, res) => {
 };
 
 export const login = async (req, res) => {
-    const selectedUser = await User.findOne( { where: {email: req.body.email }})
-    if (!selectedUser) return res.status(400).send('Email ou senha incorretos');
-
-    const passwordAndUserMatch = bcrypt.compareSync(req.body.password, selectedUser.password);
-    if (!passwordAndUserMatch) return res.status(400).send('Email ou senha incorretos');
-
-    const token = jwt.sign({ _id: selectedUser._id }, process.env.TOKEN_SECRET);
+  try {
+    const selectedUser = await User.findOne({ where: { email: req.body.email } });
+    if (!selectedUser) {
+        return res.status(400).json({ message: 'Email ou senha incorretos' });
+    }
+    const passwordMatch = bcrypt.compareSync(req.body.password, selectedUser.password);
+    if (!passwordMatch) {
+        return res.status(400).json({ message: 'Email ou senha incorretos' });
+    }
+    const token = jwt.sign(
+        { id: selectedUser.id },
+        process.env.TOKEN_SECRET,
+        { expiresIn: '8h' } 
+    );
 
     res.header('authorization-token', token);
-    res.send('User logged in')
+
+    return res.status(200).json({
+        message: 'Usuário logado com sucesso',
+        user: {
+            id: selectedUser.id,
+            name: selectedUser.name,
+            email: selectedUser.email
+        },
+        token: token
+    });
+} catch (error) {
+    console.error('Erro no login:', error);
+    return res.status(500).json({ message: 'Erro interno do servidor' });
+}
 
 }
 

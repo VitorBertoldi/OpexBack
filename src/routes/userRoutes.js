@@ -7,7 +7,7 @@ import {
   deleteUser,
   login
 } from '../controllers/userController.js';
-import { verifyTokenApp } from '../controllers/authController.js';
+import { verifyTokenApp } from '../middleware/index.js';
 
 const userRoutes = (app) => {
   app.use((req, res, next) => {
