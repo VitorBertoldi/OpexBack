@@ -1,5 +1,6 @@
 import express from 'express';
 import { createClient, readClients, getClientById, updateClient, deleteClient } from '../controllers/clientController.js';
+import { verifyTokenApp } from '../middleware/index.js';
 
 const clientRoutes = (app) => {
   app.use((req, res, next) => {
@@ -12,7 +13,7 @@ const clientRoutes = (app) => {
 
   const router = express.Router(); 
 
-  router.use(verifyTokenApp);  
+  //router.use(verifyTokenApp);  
 
   router.post('/', createClient);
   router.get('/', readClients);

@@ -1,5 +1,6 @@
 import express from 'express';
 import { createBuilding, readBuildings, getBuildingById, updateBuilding, deleteBuilding } from '../controllers/buildingController.js';
+import { verifyTokenApp } from '../middleware/index.js';
 
 const buildingRoutes = (app) => {
   app.use((req, res, next) => {
@@ -12,7 +13,7 @@ const buildingRoutes = (app) => {
 
   const router = express.Router();
 
-  router.use(verifyTokenApp);  
+  //router.use(verifyTokenApp);  
 
   router.post('/', createBuilding);
   router.get('/', readBuildings);
