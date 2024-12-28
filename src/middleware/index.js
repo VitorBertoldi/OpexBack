@@ -14,8 +14,7 @@ export const verifyTokenApp = (req, res, next) => {
     }
 };
 export const verifyToken = (req, res) => { 
-    const token = req.header('authorization-token') || req.header('authorization');  
-
+    const token = req.body['token']
     if (!token) return res.status(401).send('Access denied. No token provided.');
 
     try {
