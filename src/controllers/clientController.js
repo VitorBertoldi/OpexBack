@@ -3,7 +3,6 @@ import db from "../models/index.js";
 const { Client, Building } = db;
 
 export const createClientBuilding = async (req, res) => {
-  console.log("bateu")
     try {
         const { client, buildings } = req.body;
         let clientId;
@@ -13,8 +12,10 @@ export const createClientBuilding = async (req, res) => {
             }
         });
 
-        console.log(existing_client.dataValues.id);
-        if (!existing_client) {
+        if (existing_client) {
+            console.log(existing_client.dataValues.id);
+            clientId = existing_client.dataValues.id;
+        } else {
             existing_client = await Client.create({
                 razaoSocial: client.socialReason,
                 cnpj: client.cnpj,
@@ -23,14 +24,11 @@ export const createClientBuilding = async (req, res) => {
                 telefonePontoFocal: client.focalPhone
             });
             clientId = existing_client.dataValues.id;
-        } else {
-            clientId = existing_client.dataValues.id;
         }
 
         for (let index = 0; index < buildings.length; index++) {
             const element = buildings[index];
-            const { endereco, bairro, cidade, metragem, alturaPeDireito } =
-                element;
+            const { endereco, bairro, cidade, metragem, alturaPeDireito } = element;
 
             if (
                 !endereco ||
@@ -40,17 +38,15 @@ export const createClientBuilding = async (req, res) => {
                 !alturaPeDireito ||
                 !clientId
             ) {
-                return res
-                    .status(400)
-                    .json({
-                        error: "Todos os campos são obrigatórios.",
-                        fields: `${endereco}`,
-                        fields1: `${bairro}`,
-                        fields2: `${cidade}`,
-                        fields3: `${metragem}`,
-                        fields4: `${alturaPeDireito}`,
-                        fields5: `${clientId}`
-                    });
+                return res.status(400).json({
+                    error: "Todos os campos são obrigatórios.",
+                    fields: `${endereco}`,
+                    fields1: `${bairro}`,
+                    fields2: `${cidade}`,
+                    fields3: `${metragem}`,
+                    fields4: `${alturaPeDireito}`,
+                    fields5: `${clientId}`
+                });
             }
 
             await Building.create({
@@ -65,12 +61,13 @@ export const createClientBuilding = async (req, res) => {
 
         return res
             .status(201)
-            .json({ message: "edificações adicionadas com sucesso" });
+            .json({ message: "Edificações adicionadas com sucesso" });
     } catch (error) {
         console.error("Erro ao criar edifício:", error);
         return res.status(500).json({ error: "Erro interno do servidor" });
     }
 };
+
 
 export const createClient = async (req, res) => {
     try {
