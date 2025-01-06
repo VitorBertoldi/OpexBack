@@ -7,24 +7,43 @@ const { User } = db;
 
 export const createUser = async (req, res) => {
   try {
-    const { username, email, password } = req.body;
-    const selectedUser = await User.findOne( { where: {email: req.body.email }})
-    if (selectedUser) return res.status(400).send('Email ja cadastrado');
+    const { username, email, password, rePassword} = req.body;
 
-    if (!username || !email || !password) {
+    if (!username || !email || !password || !rePassword) {
       return res.status(400).json({
-        error: "Os campos 'username', 'email' e 'password' são obrigatórios.",
+        error: "Os campos 'username', 'email', 'password' e 'rePassword' são obrigatórios.",
       });
     }
 
-    const hashedPassword = bcrypt.hashSync(password, 10);
-    const newUser = await User.create({
-        username,
-        email,
-        password: hashedPassword,
+    if (password !== rePassword) {
+      return res.status(400).json({
+        error: 'As senhas não correspondem.',
       });
+    }
 
-    return res.status(201).json(newUser);
+    const existingUser = await User.findOne({ where: { email } });
+    if (existingUser) {
+      return res.status(409).json({ error: 'Email já cadastrado.' });
+    }
+
+    const existingUserName = await User.findOne({ where: { username } });
+    if (existingUserName) {
+      return res.status(409).json({ error: 'Username já cadastrado.' });
+    }
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    const newUser = await User.create({
+      username,
+      email,
+      password: hashedPassword,
+    });
+
+    return res.status(201).json({
+      id: newUser.id,
+      username: newUser.username,
+      email: newUser.email,
+    });
   } catch (error) {
     console.error('Erro ao criar usuário:', error);
     return res.status(500).json({ error: 'Erro interno do servidor' });
