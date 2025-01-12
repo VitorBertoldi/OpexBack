@@ -19,12 +19,16 @@ export default (sequelize, DataTypes) => {
         },
         {
             timestamps: true,
+            tableName: 'categoriaservico'
         }
     );
 
     CategoriaServico.associate = (models) => {
-        CategoriaServico.hasMany(models.OrcamentoServico, { foreignKey: "categoriaServicoId" });
+        CategoriaServico.hasMany(models.SubServico, { foreignKey: "categoriaServicoId", onDelete: "CASCADE" });
     };
+    // CategoriaServico.associate = (models) => {
+    //     CategoriaServico.hasMany(models.OrcamentoServico, { foreignKey: "categoriaServicoId" });
+    // };
 
     return CategoriaServico;
 };

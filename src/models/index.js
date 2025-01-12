@@ -3,6 +3,9 @@ import dbConfig from '../config/db.config.js';
 import usersModel from './users.model.js';
 import clientsModel from './clients.model.js';
 import buildingsModel from './buildings.model.js';
+import CategoriaServico from './categoriaServico.model.js';
+import SubServico from './subServico.model.js';
+import DetalheServico from './detalhesServico.models.js';
 
 const sequelize = new Sequelize({
   host: dbConfig.HOST,
@@ -29,6 +32,9 @@ db.sequelize = sequelize;
 db.User = usersModel(sequelize, DataTypes);
 db.Client = clientsModel(sequelize, DataTypes);
 db.Building = buildingsModel(sequelize, DataTypes);
+db.CategoriaServico = CategoriaServico(sequelize, DataTypes);
+db.SubServico = SubServico(sequelize, DataTypes);
+db.DetalheServico = DetalheServico(sequelize, DataTypes);
 
 Object.keys(db).forEach((modelName) => {
   if (db[modelName].associate) {

@@ -23,6 +23,7 @@ export default (sequelize, DataTypes) => {
         },
         {
             timestamps: true,
+            tableName: 'detalheservico'
         }
     );
 

@@ -4,6 +4,7 @@ import authRoutes from "./routes/authRoutes.js";
 import buildingRoutes from "./routes/buildingRoutes.js";
 import clientRoutes from "./routes/clientRoutes.js";
 import tokenRoute from "./routes/verifyTokenRoutes.js";
+import serviceRoute from "./routes/service.routes.js";
 import bodyParser from 'body-parser';
 import cors from "cors";
 
@@ -35,5 +36,6 @@ authRoutes(app);
 tokenRoute(app);
 buildingRoutes(app);
 clientRoutes(app);
+serviceRoute(app)
 
 export default app;
