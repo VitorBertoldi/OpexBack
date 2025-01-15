@@ -1,6 +1,6 @@
 import db from "../models/index.js";
 
-const { SubServico, DetalheServico, CategoriaServico} = db;
+const { SubServico, DetalheServico, CategoriaServico, DetalheServicoValues} = db;
 
 export const readServices = async (req, res) => {
     try {
@@ -11,7 +11,12 @@ export const readServices = async (req, res) => {
                     model: SubServico,
                     include: [
                         {
-                            model: DetalheServico
+                            model: DetalheServico,
+                            include: [
+                                {
+                                    model: DetalheServicoValues
+                                }
+                            ]
                         }
                     ]
                 }

@@ -3,32 +3,32 @@ export default (sequelize, DataTypes) => {
     const DetalheServico = sequelize.define(
         "DetalheServico",
         {
-            id: {
+            id_detalhes_servico: {
                 type: DataTypes.INTEGER,
                 primaryKey: true,
                 autoIncrement: true,
             },
-            subServicoId: {
+            id_subservico: {
                 type: DataTypes.INTEGER,
                 allowNull: false,
             },
-            detalhe: {
-                type: DataTypes.STRING(255),
+            nm_detalhe: {
+                type: DataTypes.STRING(45),
                 allowNull: false,
             },
-            valorBeta: {
-                type: DataTypes.DECIMAL(10, 2),
+            type_form: {
+                type: DataTypes.STRING(45),
                 allowNull: false,
-            },
+            }
         },
         {
             timestamps: true,
-            tableName: 'detalheservico'
+            tableName: 'detalhes_servico'
         }
     );
 
     DetalheServico.associate = (models) => {
-        DetalheServico.belongsTo(models.SubServico, { foreignKey: "subServicoId", onDelete: "CASCADE" });
+        DetalheServico.hasMany(models.DetalheServicoValues, { foreignKey: "id", onDelete: "CASCADE" });
     };
 
     return DetalheServico;

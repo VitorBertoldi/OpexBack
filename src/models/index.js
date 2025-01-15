@@ -6,6 +6,7 @@ import buildingsModel from './buildings.model.js';
 import CategoriaServico from './categoriaServico.model.js';
 import SubServico from './subServico.model.js';
 import DetalheServico from './detalhesServico.models.js';
+import DetalheServicoValues from './detalhesServicoValue.models.js';
 
 const sequelize = new Sequelize({
   host: dbConfig.HOST,
@@ -35,6 +36,7 @@ db.Building = buildingsModel(sequelize, DataTypes);
 db.CategoriaServico = CategoriaServico(sequelize, DataTypes);
 db.SubServico = SubServico(sequelize, DataTypes);
 db.DetalheServico = DetalheServico(sequelize, DataTypes);
+db.DetalheServicoValues = DetalheServicoValues(sequelize, DataTypes);
 
 Object.keys(db).forEach((modelName) => {
   if (db[modelName].associate) {

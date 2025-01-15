@@ -32,7 +32,7 @@ export default (sequelize, DataTypes) => {
     );
 
     SubServico.associate = (models) => {
-        SubServico.hasMany(models.DetalheServico, { foreignKey: "subServicoId", onDelete: "CASCADE" });
+        SubServico.hasMany(models.DetalheServico, { foreignKey: "id_subservico", onDelete: "CASCADE" });
         SubServico.belongsTo(models.CategoriaServico, { foreignKey: "categoriaServicoId", onDelete: "CASCADE" });
     };;
 
