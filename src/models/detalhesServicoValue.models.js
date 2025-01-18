@@ -3,12 +3,12 @@ export default (sequelize, DataTypes) => {
     const DetalheServicoValues = sequelize.define(
         "DetalheServicoValues",
         {
-            id: {
+            id_detalhes_servico_value: {
                 type: DataTypes.INTEGER,
                 primaryKey: true,
                 autoIncrement: true,
             },
-            subServicoId: {
+            id_detalhes_servico: {
                 type: DataTypes.INTEGER,
                 allowNull: false,
             },
@@ -28,7 +28,7 @@ export default (sequelize, DataTypes) => {
     );
 
     DetalheServicoValues.associate = (models) => {
-        DetalheServicoValues.belongsTo(models.DetalheServico, { foreignKey: "subServicoId", onDelete: "CASCADE" });
+        DetalheServicoValues.belongsTo(models.DetalheServico, { foreignKey: "id_detalhes_servico", onDelete: "CASCADE" });
     };
 
     return DetalheServicoValues;

@@ -3,7 +3,7 @@ export default (sequelize, DataTypes) => {
     const CategoriaServico = sequelize.define(
         "CategoriaServico",
         {
-            id: {
+            id_categoria: {
                 type: DataTypes.INTEGER,
                 primaryKey: true,
                 autoIncrement: true,
@@ -24,7 +24,7 @@ export default (sequelize, DataTypes) => {
     );
 
     CategoriaServico.associate = (models) => {
-        CategoriaServico.hasMany(models.SubServico, { foreignKey: "categoriaServicoId", onDelete: "CASCADE" });
+        CategoriaServico.hasMany(models.SubServico, { foreignKey: "id_categoria", onDelete: "CASCADE" });
     };
     // CategoriaServico.associate = (models) => {
     //     CategoriaServico.hasMany(models.OrcamentoServico, { foreignKey: "categoriaServicoId" });
