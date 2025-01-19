@@ -7,6 +7,9 @@ import CategoriaServico from './categoriaServico.model.js';
 import SubServico from './subServico.model.js';
 import DetalheServico from './detalhesServico.models.js';
 import DetalheServicoValues from './detalhesServicoValue.models.js';
+import OrcamentoValues from './orcamentoValues.model.js';
+import Orcamento from './orcamento.model.js';
+import OrcamentoServico from './orcamentoServico.model.js';
 
 const sequelize = new Sequelize({
   host: dbConfig.HOST,
@@ -37,6 +40,9 @@ db.CategoriaServico = CategoriaServico(sequelize, DataTypes);
 db.SubServico = SubServico(sequelize, DataTypes);
 db.DetalheServico = DetalheServico(sequelize, DataTypes);
 db.DetalheServicoValues = DetalheServicoValues(sequelize, DataTypes);
+db.OrcamentoValues = OrcamentoValues(sequelize, DataTypes);
+db.Orcamento = Orcamento(sequelize, DataTypes);
+db.OrcamentoServico = OrcamentoServico(sequelize, DataTypes);
 
 Object.keys(db).forEach((modelName) => {
   if (db[modelName].associate) {
