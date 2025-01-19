@@ -1,10 +1,11 @@
-import express from "express";
+import express, { Router } from "express";
 import userRoutes from "./routes/userRoutes.js";
 import authRoutes from "./routes/authRoutes.js";
 import buildingRoutes from "./routes/buildingRoutes.js";
 import clientRoutes from "./routes/clientRoutes.js";
 import tokenRoute from "./routes/verifyTokenRoutes.js";
 import serviceRoute from "./routes/service.routes.js";
+import orcamentoValuesRoutes from "./routes/orcamentoValues.routes.js";
 import bodyParser from 'body-parser';
 import cors from "cors";
 
@@ -36,6 +37,7 @@ authRoutes(app);
 tokenRoute(app);
 buildingRoutes(app);
 clientRoutes(app);
-serviceRoute(app)
+serviceRoute(app);
+orcamentoValuesRoutes(app);
 
 export default app;

@@ -3,7 +3,7 @@ export default (sequelize, DataTypes) => {
     const Orcamento = sequelize.define(
         "Orcamento",
         {
-            id: {
+            id_orcamento: {
                 type: DataTypes.INTEGER,
                 primaryKey: true,
                 autoIncrement: true,
@@ -20,10 +20,6 @@ export default (sequelize, DataTypes) => {
             valorTotal: {
                 type: DataTypes.DECIMAL(10, 2),
                 allowNull: false,
-            },
-            descricao: {
-                type: DataTypes.TEXT,
-                allowNull: true,
             },
             status: {
                 type: DataTypes.STRING(50),
