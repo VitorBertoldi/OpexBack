@@ -1,7 +1,7 @@
 'use strict';
 export default (sequelize, DataTypes) => {
     const Client = sequelize.define(
-        "Client",
+        "clients",
         {
             id: {
                 type: DataTypes.INTEGER,
@@ -30,7 +30,8 @@ export default (sequelize, DataTypes) => {
                 allowNull: false
             }
         },
-        {
+        {   
+            tableName:"clients",
             timestamps: true
         }
     );

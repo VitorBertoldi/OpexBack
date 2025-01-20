@@ -68,7 +68,6 @@ export const createClientBuilding = async (req, res) => {
     }
 };
 
-
 export const createClient = async (req, res) => {
     try {
         const {

@@ -60,20 +60,16 @@ export const createOrcamentoValues = async (req, res) => {
                     { transaction }
                 );
 
-                // Atualizar o valor total do serviço
                 novoOrcamentoServico.valorTotal += parseFloat(value_input || 0);
                 valorTotal += parseFloat(value_input || 0);
             }
 
-            // Salvar o valor total atualizado no serviço
             await novoOrcamentoServico.save({ transaction });
         }
 
-        // Atualizar o valor total do orçamento principal
         novoOrcamento.valorTotal = valorTotal;
         await novoOrcamento.save({ transaction });
 
-        // Confirmar a transação
         await transaction.commit();
 
         return res.status(201).json({
