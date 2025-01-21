@@ -14,7 +14,7 @@ const orcamentoValuesRoutes = (app) => {
   //router.use(verifyTokenApp);
   
   router.post('/', createOrcamentoValues);
-  router.get('/consultaOrcamento', consultaOrcamento);
+  router.post('/consultaOrcamento', consultaOrcamento);
 
   app.use('/api/orcamento-values', router);
 };
