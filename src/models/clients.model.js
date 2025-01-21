@@ -38,6 +38,7 @@ export default (sequelize, DataTypes) => {
 
     Client.associate = (models) => {
       Client.belongsTo(models.User, { foreignKey: "id_user", onDelete: "SET NULL" });
+      Client.hasMany(models.Building, { foreignKey: "clientId", onDelete: "SET NULL" });
     }
     return Client;
 };

@@ -93,16 +93,11 @@ export const consultaOrcamento = async (req, res) => {
     const transaction = await sequelize.transaction();
     
     
-    function calcularFormula(metragem, projecao_log, cnst, s6) {
+    function calcularFormula(metragem, projecao_log=(-0.05), cnst=(0.56), s6=null) {
       
       return (projecao_log * log(metragem) + e6) * metragem;
     }
-    
-    const metragem = 20000;
-    const projecao_log = -0.05;
-    const cnst = 0.56;
-    const s6 = 0;
-    
+        
     const resultado = calcularFormula(metragem, projecao_log, cnst, s6);
     try {
        

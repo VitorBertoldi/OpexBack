@@ -110,7 +110,13 @@ export const createClient = async (req, res) => {
 
 export const readClients = async (req, res) => {
     try {
-        const allClients = await Client.findAll();
+        const allClients = await Client.findAll( {
+            include: [
+                {
+                    model: Building
+                }
+            ]
+        });
         return res.status(200).json(allClients);
     } catch (error) {
         console.error("Erro ao buscar clientes:", error);

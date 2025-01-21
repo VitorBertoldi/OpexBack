@@ -29,6 +29,7 @@ export default (sequelize, DataTypes) => {
             }
         },
         {
+            tableName:"buildings",
             timestamps: true
         }
     );
