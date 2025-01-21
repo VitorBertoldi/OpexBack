@@ -76,7 +76,7 @@ export const createClient = async (req, res) => {
             nomePontoFocal,
             emailPontoFocal,
             telefonePontoFocal,
-            vendedorId
+            id_user
         } = req.body;
 
         if (
@@ -85,7 +85,7 @@ export const createClient = async (req, res) => {
             !nomePontoFocal ||
             !emailPontoFocal ||
             !telefonePontoFocal ||
-            !vendedorId
+            !id_user
         ) {
             return res
                 .status(400)
@@ -98,7 +98,7 @@ export const createClient = async (req, res) => {
             nomePontoFocal,
             emailPontoFocal,
             telefonePontoFocal,
-            vendedorId
+            id_user
         });
 
         return res.status(201).json(newClient);
@@ -143,7 +143,7 @@ export const updateClient = async (req, res) => {
             nomePontoFocal,
             emailPontoFocal,
             telefonePontoFocal,
-            vendedorId
+            id_user
         } = req.body;
 
         const client = await Client.findByPk(id);
@@ -158,7 +158,7 @@ export const updateClient = async (req, res) => {
             nomePontoFocal,
             emailPontoFocal,
             telefonePontoFocal,
-            vendedorId
+            id_user
         });
 
         return res.status(200).json(updatedClient);

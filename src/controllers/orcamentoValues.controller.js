@@ -1,5 +1,5 @@
 import db from "../models/index.js";
-
+import { log } from 'mathjs';
 const { Orcamento, OrcamentoServico, OrcamentoValues, sequelize } = db;
 
 export const createOrcamentoValues = async (req, res) => {
@@ -87,5 +87,30 @@ export const createOrcamentoValues = async (req, res) => {
         await transaction.rollback();
         console.error("Erro ao criar orçamento:", error);
         return res.status(500).json({ error: "Erro interno do servidor." });
+    }
+};
+export const consultaOrcamento = async (req, res) => {
+    const transaction = await sequelize.transaction();
+    
+    
+    function calcularFormula(metragem, projecao_log, cnst, s6) {
+      
+      return (projecao_log * log(metragem) + e6) * metragem;
+    }
+    
+    const metragem = 20000;
+    const projecao_log = -0.05;
+    const cnst = 0.56;
+    const s6 = 0;
+    
+    const resultado = calcularFormula(metragem, projecao_log, cnst, s6);
+    try {
+       
+
+        await transaction.commit();
+
+    } catch (error) {
+        await transaction.rollback();
+        console.error("Erro ao criar orçamento:", error);
     }
 };

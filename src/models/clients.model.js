@@ -37,7 +37,7 @@ export default (sequelize, DataTypes) => {
     );
 
     Client.associate = (models) => {
-      Client.belongsTo(models.User, { foreignKey: "vendedorId", onDelete: "SET NULL" });
+      Client.belongsTo(models.User, { foreignKey: "id_user", onDelete: "SET NULL" });
     }
     return Client;
 };
